@@ -10,8 +10,6 @@ A modern and responsive gym website built for showcasing fitness services, train
 - Home page with hero section
 - About gym section
 - Trainers section
-- Membership plans
-- Contact page
 
 ## 🛠️ Tech Stack
 - HTML
