@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="GymLog">
+    <meta name="theme-color" content="#050510">
+    <title>GymLog</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Exo+2:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="hdr">
+            <div>
+                <div style="display:flex;align-items:baseline">
+                    <span class="logo">GYMLOG</span><span class="logo-pro">PRO</span>
+                </div>
+                <div class="hdate" id="hdate">Loading...</div>
+            </div>
+            <div class="hstats">
+                <div class="hs">
+                    <div class="hs-v" id="h-w" style="color:var(--b)">0</div>
+                    <div class="hs-l">ML</div>
+                </div>
+                <div class="hs">
+                    <div class="hs-v" id="h-s" style="color:var(--g)">0</div>
+                    <div class="hs-l">SETS</div>
+                </div>
+                <div class="hs">
+                    <div class="hs-v" id="h-c" style="color:var(--y)">0/9</div>
+                    <div class="hs-l">TASKS</div>
+                </div>
+                <div class="stk" id="h-stk">&#128293;0</div>
+            </div>
+        </div>
+        <div id="tabs">
+            <button class="tb on" id="tab-today">&#128203; TODAY</button>
+            <button class="tb" id="tab-workout">&#128170; WORKOUT</button>
+            <button class="tb" id="tab-water">&#128167; WATER</button>
+            <button class="tb" id="tab-exercises">&#127947; EXERCISES</button>
+            <button class="tb" id="tab-diet">&#129367; DIET</button>
+            <button class="tb" id="tab-calendar">&#128197; CALENDAR</button>
+            <button class="tb" id="tab-progress">&#128200; STATS</button>
+            <button class="tb" id="tab-master">&#9881;&#65039; MASTER</button>
+        </div>
+        <div id="content">
+            <div class="page on" id="page-today">
+                <div class="wx">
+                    <div>
+                        <div
+                            style="font-family:'Orbitron',monospace;font-size:8px;color:var(--b);letter-spacing:2px;margin-bottom:3px">
+                            MAHEMDAVAD &middot; KHEDA &middot; GUJARAT</div>
+                        <div style="font-family:'Orbitron',monospace;font-size:34px;font-weight:900;color:#fff;line-height:1"
+                            id="wx-temp">--&deg;</div>
+                        <div style="font-size:11px;color:var(--mu2);margin-top:3px" id="wx-desc">Loading...</div>
+                    </div>
+                    <div style="text-align:right">
+                        <div style="font-size:36px" id="wx-icon">&#127780;&#65039;</div>
+                        <div style="font-size:9px;color:var(--mu);margin-top:3px" id="wx-ext"></div>
+                    </div>
+                </div>
+                <div class="dh">
+                    <div>
+                        <div style="font-family:'Orbitron',monospace;font-size:17px;font-weight:900;letter-spacing:3px;color:var(--r)"
+                            id="day-name">--</div>
+                        <div style="font-size:11px;color:var(--mu2);margin-top:4px" id="day-focus"></div>
+                    </div>
+                    <button class="btn btn-r" style="padding:9px 14px;font-size:12px" id="btn-save-today">&#128190; SAVE
+                        DAY</button>
+                </div>
+                <div class="card" style="border-color:rgba(0,170,255,.2)">
+                    <div class="st">&#9989; DAILY CHECKLIST</div>
+                    <div id="chklist"></div>
+                </div>
+                <div class="st">&#127947; TODAY'S EXERCISES</div>
+                <div id="today-exlist"></div>
+            </div>
+            <div class="page" id="page-workout">
+                <div class="cbanner" id="cbanner">
+                    <div style="font-size:36px">&#127942;&#127881;&#128170;</div>
+                    <div
+                        style="font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:var(--g);letter-spacing:3px;margin-top:5px">
+                        WORKOUT COMPLETE!</div>
+                    <div style="font-size:12px;color:var(--mu2);margin-top:5px">Amazing! Save your day below.</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+                    <div style="font-family:'Orbitron',monospace;font-size:14px;font-weight:900;color:var(--r);border:1px solid rgba(255,45,85,.3);border-radius:20px;padding:4px 14px;letter-spacing:2px"
+                        id="wk-day">--</div>
+                    <div style="font-size:11px;color:var(--mu2)" id="wk-focus"></div>
+                </div>
+                <div id="wk-list"></div>
+                <button class="btn btn-r"
+                    style="width:100%;padding:15px;font-family:'Orbitron',monospace;font-size:16px;letter-spacing:3px;border-radius:14px;margin-top:4px"
+                    id="btn-save-workout">&#128190; SAVE DAY &amp; PROGRESS</button>
+            </div>
+            <div class="page" id="page-water">
+                <div class="ring-wrap">
+                    <svg width="165" height="165" viewBox="0 0 165 165">
+                        <defs>
+                            <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00aaff" />
+                                <stop offset="100%" style="stop-color:#bf5fff" />
+                            </linearGradient>
+                            <filter id="gf">
+                                <feGaussianBlur stdDeviation="2.5" result="b" />
+                                <feMerge>
+                                    <feMergeNode in="b" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <circle cx="82.5" cy="82.5" r="70" fill="none" stroke="rgba(255,255,255,.05)"
+                            stroke-width="10" />
+                        <circle id="w-ring" cx="82.5" cy="82.5" r="70" fill="none" stroke="url(#rg)" stroke-width="10"
+                            stroke-linecap="round" stroke-dasharray="439.8" stroke-dashoffset="439.8"
+                            style="transform:rotate(-90deg);transform-origin:82.5px 82.5px;transition:stroke-dashoffset .7s ease"
+                            filter="url(#gf)" />
+                    </svg>
+                    <div class="ring-center">
+                        <div class="rpct" id="r-pct">0%</div>
+                        <div style="font-size:10px;color:var(--mu);margin-top:2px" id="r-ml">0/3500ml</div>
+                        <div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--c);margin-top:3px"
+                            id="r-ltr">0.00 L</div>
+                    </div>
+                </div>
+                <div class="winfo">
+                    <div>
+                        <div class="wi-v" id="wi-1">0 ml</div>
+                        <div class="wi-l">CONSUMED</div>
+                    </div>
+                    <div class="wdiv"></div>
+                    <div>
+                        <div class="wi-v" id="wi-2" style="color:var(--g)">0.00 L</div>
+                        <div class="wi-l">LITERS</div>
+                    </div>
+                    <div class="wdiv"></div>
+                    <div>
+                        <div class="wi-v" id="wi-3" style="color:var(--y)">3500</div>
+                        <div class="wi-l">REMAINING</div>
+                    </div>
+                    <div class="wdiv"></div>
+                    <div>
+                        <div class="wi-v" id="wi-4">3500</div>
+                        <div class="wi-l">GOAL ml</div>
+                    </div>
+                </div>
+                <div style="font-size:10px;color:var(--r);text-align:center;margin-bottom:13px">&#9888;&#65039; Creatine
+                    users: 3-4 liters daily!</div>
+                <div class="st">QUICK ADD</div>
+                <div class="wgrid">
+                    <button class="wbtn" id="w150">150<small>small cup</small></button>
+                    <button class="wbtn" id="w200">200<small>glass</small></button>
+                    <button class="wbtn" id="w300">300<small>pre-workout</small></button>
+                    <button class="wbtn" id="w350">350<small>bottle</small></button>
+                    <button class="wbtn" id="w500">500<small>big bottle</small></button>
+                    <button class="wbtn" id="w1000">1000<small>1 Liter</small></button>
+                </div>
+                <div style="display:flex;gap:8px;margin-bottom:13px">
+                    <input class="inp" type="number" id="cml" placeholder="Custom ml..." style="flex:1">
+                    <button class="btn btn-b" style="padding:9px 15px;font-size:13px" id="btn-add-custom">ADD</button>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                    <div class="st" style="margin-bottom:0">TODAY'S LOG</div>
+                    <button
+                        style="background:none;border:none;color:var(--mu2);font-size:12px;cursor:pointer;font-family:'Exo 2',sans-serif"
+                        id="btn-undo-w">&#8617; Undo</button>
+                </div>
+                <div id="w-log"></div>
+            </div>
+            <div class="page" id="page-exercises">
+                <div class="exsticky">
+                    <input class="exsearch" id="ex-search" type="text" placeholder="&#128269; Search exercise...">
+                    <div class="mrow" id="muscle-row"></div>
+                </div>
+                <div class="dtabs" id="day-tabs"></div>
+                <div id="ex-lib"></div>
+            </div>
+            <div class="page" id="page-diet">
+                <div class="cal-wrap">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-end">
+                        <div>
+                            <div
+                                style="font-size:9px;color:var(--mu);letter-spacing:2px;font-family:'Orbitron',monospace;margin-bottom:3px">
+                                CALORIES TODAY</div>
+                            <div
+                                style="font-family:'Orbitron',monospace;font-size:30px;font-weight:900;color:var(--o);line-height:1">
+                                <span id="cal-eat">0</span><span
+                                    style="font-size:11px;color:var(--mu);font-family:'Exo 2',sans-serif"> kcal</span>
+                            </div>
+                        </div>
+                        <div style="text-align:right">
+                            <div style="font-size:9px;color:var(--mu)">REMAINING</div>
+                            <div style="font-family:'Orbitron',monospace;font-size:16px" id="cal-rem">2200</div>
+                            <div style="font-size:9px;color:var(--mu)">Goal: <span id="cal-goal">2200</span></div>
+                        </div>
+                    </div>
+                    <div class="cal-pb">
+                        <div class="cal-pbf" id="cal-bar" style="width:0%"></div>
+                    </div>
+                </div>
+                <div id="diet-cards"></div>
+            </div>
+            <div class="page" id="page-calendar">
+                <div class="cal-nav">
+                    <button class="cnb" id="cal-prev">&#8249;</button>
+                    <div class="cal-title" id="cal-title"></div>
+                    <button class="cnb" id="cal-next">&#8250;</button>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:11px">
+                    <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--mu)">
+                        <div style="width:10px;height:10px;border-radius:3px;background:var(--g)"></div>Full
+                    </div>
+                    <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--mu)">
+                        <div style="width:10px;height:10px;border-radius:3px;background:var(--y)"></div>Partial
+                    </div>
+                    <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--mu)">
+                        <div style="width:10px;height:10px;border-radius:3px;background:var(--r)"></div>Missed
+                    </div>
+                    <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--mu)">
+                        <div style="width:10px;height:10px;border-radius:3px;border:2px solid var(--r)"></div>Today
+                    </div>
+                </div>
+                <div class="cgrid" id="cal-grid"></div>
+                <div id="day-detail"></div>
+                <div class="st" style="margin-top:6px">MONTHLY CHARTS</div>
+                <div class="chc">
+                    <div class="chh">
+                        <div class="cht" style="color:var(--b)">&#128167; WATER</div>
+                    </div>
+                    <div class="baro">
+                        <div class="bars" id="cal-cw"></div>
+                    </div>
+                </div>
+                <div class="chc">
+                    <div class="chh">
+                        <div class="cht" style="color:var(--g)">&#128170; SETS</div>
+                    </div>
+                    <div class="baro">
+                        <div class="bars" id="cal-cs"></div>
+                    </div>
+                </div>
+                <div class="chc">
+                    <div class="chh">
+                        <div class="cht" style="color:var(--y)">&#128197; WEEK VIEW</div>
+                        <div class="chf">
+                            <button class="cf on" id="wv-this">THIS</button>
+                            <button class="cf" id="wv-last">LAST</button>
+                        </div>
+                    </div>
+                    <div class="baro">
+                        <div class="bars" id="cal-wk"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page" id="page-progress">
+                <div class="st">&#127942; PERSONAL RECORDS</div>
+                <div class="prgrid" id="pr-grid"></div>
+                <div class="st">&#128200; ANALYTICS</div>
+                <div class="chc">
+                    <div class="chh">
+                        <div class="cht" style="color:var(--b)">&#128167; WATER</div>
+                        <div class="chf"><button class="cf on" data-type="water" data-days="7">7D</button><button
+                                class="cf" data-type="water" data-days="14">14D</button><button class="cf"
+                                data-type="water" data-days="30">30D</button></div>
+                    </div>
+                    <div class="baro">
+                        <div class="bars" id="ch-water"></div>
+                    </div>
+                </div>
+                <div class="chc">
+                    <div class="chh">
+                        <div class="cht" style="color:var(--g)">&#128170; SETS</div>
+                        <div class="chf"><button class="cf on" data-type="sets" data-days="7">7D</button><button
+                                class="cf" data-type="sets" data-days="14">14D</button><button class="cf"
+                                data-type="sets" data-days="30">30D</button></div>
+                    </div>
+                    <div class="baro">
+                        <div class="bars" id="ch-sets"></div>
+                    </div>
+                </div>
+                <div class="chc">
+                    <div class="chh">
+                        <div class="cht" style="color:var(--y)">&#9989; TASKS</div>
+                        <div class="chf"><button class="cf on" data-type="tasks" data-days="7">7D</button><button
+                                class="cf" data-type="tasks" data-days="14">14D</button></div>
+                    </div>
+                    <div class="baro">
+                        <div class="bars" id="ch-tasks"></div>
+                    </div>
+                </div>
+                <div class="chc">
+                    <div class="chh">
+                        <div class="cht" style="color:var(--o)">&#128293; CALORIES</div>
+                        <div class="chf"><button class="cf on" data-type="cals" data-days="7">7D</button><button
+                                class="cf" data-type="cals" data-days="14">14D</button></div>
+                    </div>
+                    <div class="baro">
+                        <div class="bars" id="ch-cals"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page" id="page-master">
+                <div class="mps">
+                    <div class="mpt">&#9881;&#65039; SETTINGS</div>
+                    <div class="mpr"><span class="mpk">Water Goal (ml)</span><input class="mpin" type="number"
+                            id="mp-wg"></div>
+                    <div class="mpr"><span class="mpk">Calorie Goal (kcal)</span><input class="mpin" type="number"
+                            id="mp-cg"></div>
+                    <div class="mpr"><span class="mpk">Your Name</span><input class="mpin" type="text" id="mp-nm"
+                            placeholder="Name" style="width:120px;text-align:right"></div>
+                </div>
+                <div class="mps">
+                    <div class="mpt">&#9989; CHECKLIST EDITOR</div>
+                    <div id="mp-chk"></div><button class="btn btn-b"
+                        style="padding:7px 13px;font-size:11px;margin-top:7px" id="btn-add-chk">+ ADD TASK</button>
+                </div>
+                <div class="mps">
+                    <div class="mpt">&#128197; WEEKLY PLAN EDITOR</div>
+                    <div id="mp-plan"></div>
+                </div>
+                <div class="mps">
+                    <div class="mpt">&#128190; BACKUP &amp; RESTORE</div>
+                    <div style="font-size:11px;color:var(--mu2);margin-bottom:11px;line-height:1.8">Data saves in phone
+                        browser. Export to Google Drive or WhatsApp to keep safe.</div>
+                    <div style="display:flex;gap:7px;flex-wrap:wrap">
+                        <button class="btn btn-g" style="padding:9px 13px;font-size:11px"
+                            id="btn-export">&#11015;&#65039; EXPORT</button>
+                        <button class="btn btn-y" style="padding:9px 13px;font-size:11px"
+                            id="btn-import-trigger">&#11014;&#65039; IMPORT</button>
+                        <button class="btn btn-gh" style="padding:9px 13px;font-size:11px"
+                            id="btn-clear">&#128465;&#65039; CLEAR TODAY</button>
+                    </div>
+                    <input type="file" id="import-file" accept=".json" style="display:none">
+                    <div
+                        style="background:rgba(0,170,255,.05);border:1px solid rgba(0,170,255,.15);border-radius:9px;padding:11px;font-size:11px;color:var(--mu2);line-height:1.9;margin-top:11px">
+                        &#128161; <strong style="color:var(--b)">App update karne ka tarika:</strong><br>
+                        1. Export backup &#8594; Google Drive pe save karo<br>
+                        2. Naya app open karo<br>
+                        3. Import backup &#8594; sab data wapas &#9989;
+                    </div>
+                </div>
+                <div class="mps">
+                    <div class="mpt">&#128200; DATA SUMMARY</div>
+                    <div id="mp-stats"></div>
+                </div>
+            </div>
+        </div>
+        <div id="bnav">
+            <button class="nb on" id="nav-today">
+                <div class="nb-i">&#128203;</div>TODAY
+            </button>
+            <button class="nb" id="nav-workout">
+                <div class="nb-i">&#128170;</div>WORKOUT
+            </button>
+            <button class="nb" id="nav-water">
+                <div class="nb-i">&#128167;</div>WATER
+            </button>
+            <button class="nb" id="nav-exercises">
+                <div class="nb-i">&#127947;</div>EXER
+            </button>
+            <button class="nb" id="nav-diet">
+                <div class="nb-i">&#129367;</div>DIET
+            </button>
+            <button class="nb" id="nav-calendar">
+                <div class="nb-i">&#128197;</div>CAL
+            </button>
+            <button class="nb" id="nav-progress">
+                <div class="nb-i">&#128200;</div>STATS
+            </button>
+            <button class="nb" id="nav-master">
+                <div class="nb-i">&#9881;&#65039;</div>MASTER
+            </button>
+        </div>
+    </div>
+    <div id="rov">
+        <div style="font-family:'Orbitron',monospace;font-size:14px;letter-spacing:4px;color:#f0f4ff;margin-bottom:5px">
+            REST TIMER</div>
+        <div style="font-size:11px;color:var(--mu);margin-bottom:22px">Recover - next set coming...</div>
+        <div class="rt-ring">
+            <div class="rt-t" id="rt-sec">60</div>
+            <div style="font-size:9px;color:var(--mu);letter-spacing:2px">SECONDS</div>
+        </div>
+        <div style="display:flex;gap:10px">
+            <button class="btn btn-r" style="padding:11px 22px;font-size:13px" id="btn-skip-rest">SKIP &#9654;</button>
+            <button class="btn btn-gh" style="padding:11px 22px;font-size:13px" id="btn-add-rest">+30s</button>
+        </div>
+    </div>
+    <div id="toast"></div>
+</body>
+<script src="/main.js"></script>
+
+</html>
